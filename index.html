@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Bonheur+Royale&amp;display=swap" rel="stylesheet">
+<style>
+  body {
+margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #9b8476;
+    height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  .card {
+    width: 80%;
+    max-width: 420px;
+    aspect-ratio: 9 / 16;
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    animation: aparecer 1.2s ease-out forwards;
+  }
+
+  @keyframes aparecer {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Imagen corregida */
+  .header-img {
+    width: 100%;
+    max-width: 360px;
+    border-radius: 15px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease forwards, float 4s ease-in-out infinite;
+    animation-delay: 0.2s;
+    margin-top: 130px;
+  }
+  
+  @keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+  .greeting {
+    font-family: 'Bonheur Royale', cursive;
+    font-size: 70px;
+    color: #1b2a41;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1.2s ease forwards;
+    animation-delay: 0.6s;
+    margin-top: -50px;
+  }
+
+  .invitation {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1.2s ease forwards;
+    animation-delay: 0.8s;
+    margin-bottom: 0px;
+    margin-top: -5px;
+    max-width: 70%;
+  }
+
+  .details {
+    font-size: 17px;
+    color: #333;
+    text-align: center;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeIn 1.2s ease forwards;
+    animation-delay: 1s;
+    margin-top: 20px;
+  }
+  
+@keyframes strong-buzz-pause {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  10%  { transform: translate(-1.5px, 1px) rotate(-1deg); }
+  20%  { transform: translate(1.5px, -1px) rotate(1deg); }
+  30%  { transform: translate(-1px, -1.5px) rotate(-1deg); }
+  40%  { transform: translate(1px, 1.5px) rotate(1deg); }
+  50%  { transform: translate(0, 0) rotate(0deg); } /* fin del zumbido */
+  100% { transform: translate(0, 0) rotate(0deg); } /* pausa hasta el siguiente ciclo */
+}
+
+.wave-text {
+  display: inline-block;
+  animation: strong-buzz-pause 3s ease-in-out infinite;
+  font-weight: bold;
+  color: #1b2a41;
+  transform-origin: center;
+}
+
+
+  .address {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1.2s ease forwards;
+    animation-delay: 1.2s;
+    margin-top: -10px;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @media (max-width: 480px) {
+    .greeting { font-size: 38px; }
+    .header-img { width: 70%; }
+  }
+  
+  .firework {
+  position: absolute;
+  top: 35%;
+  width: 0;
+  height: 0;
+  z-index: 2;
+}
+
+.firework span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: explode 2s ease-out infinite;
+}
+
+.firework.left span:nth-child(1) { --x:50px; --y:-80px; background:red; animation-delay:2s;}
+.firework.left span:nth-child(2) { --x:70px; --y:-60px; background:yellow; animation-delay:0.3s;}
+.firework.left span:nth-child(3) { --x:60px; --y:-100px; background:green; animation-delay:0.4s;}
+.firework.left span:nth-child(4) { --x:80px; --y:-70px; background:blue; animation-delay:0.5s;}
+.firework.left span:nth-child(5) { --x:40px; --y:-90px; background:magenta; animation-delay:0.6s;}
+
+.firework.right span:nth-child(1) { --x:-50px; --y:-80px; background:red; animation-delay:2s;}
+.firework.right span:nth-child(2) { --x:-70px; --y:-60px; background:yellow; animation-delay:0.3s;}
+.firework.right span:nth-child(3) { --x:-60px; --y:-100px; background:green; animation-delay:0.4s;}
+.firework.right span:nth-child(4) { --x:-80px; --y:-70px; background:blue; animation-delay:0.5s;}
+.firework.right span:nth-child(5) { --x:-40px; --y:-90px; background:magenta; animation-delay:0.6s;}
+
+@keyframes explode {
+  0% { transform: translate(0,0) scale(1); opacity:1; }
+  80% { transform: translate(var(--x), var(--y)) scale(1); opacity:1; }
+  100% { transform: translate(var(--x), var(--y)) scale(15); opacity:0; }
+}
+
+
+
+</style>
+<style type="text/css">
+.grande { font-size: 60px; }
+</style>
+<script>
+// Escribir aqui el código Javascript
+</script>
+</head>
+<body>
+
+  <div class="card">
+    
+<!-- Fuego artificial izquierdo -->
+<div class="firework left" style="left:0;">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- Fuego artificial derecho -->
+<div class="firework right" style="right:0;">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+
+
+    <!-- Imagen correctamente escalada -->
+    <img class="header-img" src="https://i.postimg.cc/pXS927wk/single-line-girl-graduate-vector-51075193.avif" alt="Graduate">
+
+    <div class="greeting">Hola, soy Karoll</div>
+
+    <div class="invitation">
+      Quiero invitarte a compartir este día especial conmigo.<br><br><span class="wave-text">¡No faltes!</span>
+    </div>
+
+    <div class="details">
+      <strong>10 DIC&nbsp;&nbsp;&nbsp;</strong> | 
+      <strong>&nbsp;&nbsp;&nbsp;2025&nbsp;&nbsp;&nbsp;</strong> | 
+      <strong>&nbsp;&nbsp;&nbsp;07:00 PM</strong>
+    </div>
+
+    <div class="address">
+      Manzana A Casa 2 Urbanización Sevilla
+    </div>
+  </div>
+
+
+
+</body></html>
