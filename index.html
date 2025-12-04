@@ -50,7 +50,7 @@ margin: 0;
     opacity: 0;
     animation: fadeIn 1.2s ease forwards, float 4s ease-in-out infinite;
     animation-delay: 0.2s;
-    margin-top: 80px;
+    margin-top: 50px;
   }
   
   @keyframes float {
@@ -133,7 +133,7 @@ margin: 0;
   
   .firework {
   position: absolute;
-  top: 30%;
+  top: 25%;
   width: 0;
   height: 0;
   z-index: 2;
@@ -165,11 +165,21 @@ margin: 0;
   80% { transform: translate(var(--x), var(--y)) scale(1); opacity:1; }
   100% { transform: translate(var(--x), var(--y)) scale(15); opacity:0; }
 }
+  
+  /* Estilos para el audio */
+  #audioPlayer {
+    margin-top: 15px;
+    width: 50%;
+    outline: none;
+  }
 
 </style>
 <style type="text/css">
 .grande { font-size: 60px; }
 </style>
+  
+  
+  
 <script>
 // Escribir aqui el código Javascript
 </script>
@@ -207,16 +217,17 @@ margin: 0;
     <div class="address">
       Manzana A Casa 2 Urbanización Sevilla
     </div>
+    
+    <!-- Reproductor de audio -->
+    <audio id="audioPlayer" controls loop>
+      <source src="Music.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio HTML5.
+    </audio>
+    
   </div>
-
-
+ 
   
 </body></html>
-
-
-
-
-
 
 
 
