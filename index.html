@@ -177,28 +177,6 @@ margin: 0;
 </script>
 </head>
 <body>
-
-  <!-- Iframe de música de YouTube (oculto) -->
-  <iframe id="ytplayer" width="0" height="0"
-      src="https://www.youtube.com/embed/ROa5gf_trkI?autoplay=1&loop=1&playlist=ROa5gf_trkI&controls=0&mute=1"
-      frameborder="0" allow="autoplay">
-  </iframe>
-
-  <!-- Botón para activar sonido -->
-  <button id="playMusic" style="
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 999;
-    padding: 10px 15px;
-    font-size: 16px;
-    background: #1b2a41;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  ">🎵 Reproducir música</button>
-  
   <div class="card">
     
 <!-- Fuego artificial izquierdo -->
@@ -233,17 +211,10 @@ margin: 0;
     </div>
   </div>
 
-  <script>
-    const playBtn = document.getElementById('playMusic');
-    const iframe = document.getElementById('ytplayer');
 
-    playBtn.addEventListener('click', () => {
-      iframe.src = "https://www.youtube.com/embed/ROa5gf_trkI?autoplay=1&loop=1&playlist=ROa5gf_trkI&controls=0&mute=0";
-      playBtn.style.display = 'none'; // Oculta el botón después de activar sonido
-    });
-  </script>
   
 </body></html>
+
 
 
 
