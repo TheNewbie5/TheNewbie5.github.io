@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerario de Viaje: Caldas y Tolima (Noviembre 2026)</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        .card-active {
+            border-color: #059669 !important;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.2), 0 8px 10px -6px rgba(5, 150, 105, 0.1);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .map-pin {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .map-pin:hover {
+            transform: scale(1.25);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="bg-gradient-to-r from-emerald-900 to-teal-950 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-route text-2xl text-amber-400"></i>
+                <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Ruta Valledupar → Tolima & Caldas</h1>
+            </div>
+            <p class="text-xs sm:text-sm text-emerald-100 flex items-center gap-2">
+                <i class="fa-solid fa-calendar-days text-amber-400"></i> 11 Nov - 15 Nov, 2026
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+        <!-- Intro -->
+        <section class="text-center max-w-3xl mx-auto">
+            <span class="text-xs uppercase tracking-widest text-emerald-700 font-semibold bg-emerald-100 px-3 py-1 rounded-full">Itinerario Personalizado</span>
+            <h2 class="text-3xl font-extrabold text-stone-900 mt-3 sm:text-4xl">De Valledupar a los Andes Centrales</h2>
+            <p class="mt-3 text-base text-stone-600">
+                Recorrido oficial de viaje: Salida nocturna desde Valledupar, llegada a Honda, exploración cultural y de atractivos en Ibagué y cierre de aventura en Murillo, Termales y el Nevado del Ruiz.
+            </p>
+        </section>
+
+        <!-- INTERACTIVE MAP SECTION -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-stone-100 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+                        <i class="fa-solid fa-map text-emerald-600"></i> Mapa Interactivo del Viaje
+                    </h3>
+                    <p class="text-xs text-stone-500">Selecciona un punto en el mapa para ver los detalles y horarios del itinerario abajo.</p>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-2 text-xs font-medium">
+                    <button onclick="filterDept('all')" id="btn-all" class="filter-btn px-3 py-1.5 rounded-full bg-emerald-700 text-white shadow-sm transition">
+                        Toda la Ruta (4)
+                    </button>
+                    <button onclick="filterDept('Tolima')" id="btn-Tolima" class="filter-btn px-3 py-1.5 rounded-full bg-stone-100 text-stone-700 hover:bg-emerald-100 transition">
+                        Tolima (3)
+                    </button>
+                    <button onclick="filterDept('Caldas')" id="btn-Caldas" class="filter-btn px-3 py-1.5 rounded-full bg-stone-100 text-stone-700 hover:bg-emerald-100 transition">
+                        Caldas / Nevados (1)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visual Interactive Map Canvas -->
+            <div class="relative w-full h-[420px] bg-gradient-to-br from-stone-900 via-teal-950 to-emerald-950 rounded-xl overflow-hidden flex items-center justify-center shadow-inner border border-stone-800">
+                
+                <!-- Background Grid -->
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                
+                <div class="relative z-10 w-full max-w-2xl h-full flex items-center justify-center p-4">
+                    <svg viewBox="0 0 500 450" class="w-full h-full drop-shadow-2xl">
+                        <!-- Línea de Conexión de Ruta -->
+                        <path d="M 120 80 Q 240 180 340 260 T 370 360" fill="none" stroke="#34d399" stroke-width="3" stroke-dasharray="6,6" opacity="0.6"/>
+
+                        <!-- Valledupar (Salida) -->
+                        <g class="map-pin" onclick="focusPlace('valledupar')">
+                            <circle cx="120" cy="80" r="10" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+                            <text x="120" y="65" fill="#e0f2fe" font-size="11" text-anchor="middle" font-weight="600">Valledupar (Salida)</text>
+                        </g>
+
+                        <!-- Honda (Jueves 12 Nov) -->
+                        <g class="map-pin" onclick="focusPlace('honda')">
+                            <circle cx="280" cy="200" r="11" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+                            <text x="280" y="222" fill="#fde68a" font-size="11" text-anchor="middle" font-weight="600">Honda (12 Nov)</text>
+                        </g>
+
+                        <!-- Ibagué (Viernes 13 Nov) -->
+                        <g class="map-pin" onclick="focusPlace('ibague')">
+                            <circle cx="340" cy="280" r="11" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+                            <text x="340" y="303" fill="#fde68a" font-size="11" text-anchor="middle" font-weight="600">Ibagué & Combeima (13 Nov)</text>
+                        </g>
+
+                        <!-- Murillo & Nevados (Sábado 14 Nov) -->
+                        <g class="map-pin" onclick="focusPlace('murillo')">
+                            <circle cx="370" cy="360" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+                            <text x="370" y="384" fill="#a7f3d0" font-size="11" text-anchor="middle" font-weight="600">Murillo & Nevados (14 Nov)</text>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Indicador Flotante -->
+                <div class="absolute bottom-3 left-3 bg-stone-900/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-stone-700 text-xs text-stone-300 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Haz clic en cualquier parada del mapa para ver los detalles
+                </div>
+            </div>
+        </section>
+
+        <!-- ITINERARY PLACES SECTION -->
+        <section class="space-y-6">
+            <div class="border-b border-stone-200 pb-4">
+                <h3 class="text-2xl font-bold text-stone-900 flex items-center gap-3">
+                    <i class="fa-solid fa-route text-amber-500"></i> Detalle del Itinerario Día a Día
+                </h3>
+                <p class="text-sm text-stone-500 mt-1">Cronograma de viaje establecido desde el 11 hasta el 15 de noviembre de 2026.</p>
+            </div>
+
+            <!-- List of Destination Cards -->
+            <div id="places-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Cards injected dynamically via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-8 border-t border-stone-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-2">
+            <p class="font-medium text-stone-300">Itinerario de Viaje: Valledupar → Honda → Ibagué → Murillo & Nevados</p>
+            <p>© 2026 Planificador de Viajes. Creado con Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data and Interactivity -->
+    <script>
+        const destinations = [
+            {
+                id: 'valledupar',
+                name: 'Salida desde Valledupar',
+                dept: 'Cesar / Ruta',
+                date: 'Miércoles 11 Nov, 5:00 PM',
+                climate: '30°C (Cálido)',
+                stay: 'Inicio de Viaje',
+                images: [
+                    'https://www.viajescomfama.com/portals/1139/Images/valledupar/valledupar-portada01.jpg',
+                    'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Plaza_Valledupar.jpg/330px-Plaza_Valledupar.jpg',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFPNdDhkX9kHddlh9jJ7UOow2ukGwU1kRNCrQmCHVic-mmPWmScAc95u0-&s=10'
+                ],
+                description: 'Inicio del recorrido vial saliendo en la tarde/noche desde Valledupar hacia la zona andina central del país.',
+                activities: [
+                    'Abordaje y salida puntual a las 5:00 PM',
+                    'Trayecto nocturno en carretera hacia el interior'
+                ],
+                tip: 'Prepara música, buen abrigo para las zonas altas del trayecto nocturno y verifica documentos del vehículo.'
+            },
+            {
+                id: 'honda',
+                name: 'Honda (Llegada)',
+                dept: 'Tolima',
+                date: 'Jueves 12 Nov, ~7:00 AM',
+                climate: '28°C (Cálido)',
+                stay: 'Mañana del 12 Nov',
+                images: [
+                    'https://www.semana.com/resizer/v2/SGI4FYF3BJAANIJXDGNUU5IC6Q.jpg?auth=02dd7e8de59b33f278144164cf9ee2b8a4db6975cd39f978c507b59e15949cf3&width=2121',
+                    'https://images.unsplash.com/photo-1518780664697-55e3ad937233',
+                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e'
+                ],
+                description: 'Llegada estimada a la histórica "Ciudad de los Puentes" a orillas del Río Magdalena para descansar del viaje y desayunar.',
+                activities: [
+                    'Llegada sobre las 7:00 AM y desayuno típico tolimense',
+                    'Breve recorrido matutino por la Calle de las Trampas y arquitectura colonial',
+                    'Ida a Mariquita'
+                ],
+                tip: 'Disfruta de la frescura matutina junto al río antes de que suba la temperatura del mediodía.'
+            },
+            {
+                id: 'ibague',
+                name: 'Ibagué & Cañón del Combeima',
+                dept: 'Tolima',
+                date: 'Viernes 13 Nov, 2:00 PM en adelante',
+                climate: '21°C (Agradable)',
+                stay: 'Tarde del 13 Nov',
+                images: [
+                    'https://www.civitatis.com/f/colombia/ibague/senderismo-canon-combeima-finca-rivera-589x392.jpg',
+                    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80'
+                ],
+                description: 'Desplazamiento a Ibagué saliendo a las 2:00 PM (2 horas de viaje) para adentrarse en el majestuoso Cañón del Combeima y visitar atractivos imperdibles.',
+                activities: [
+                    'Visita a la famosa Casa al Revés',
+                    'Recorrido y parada en El Espumoso',
+                    'Senderismo y paisajes imponentes en el Cañón del Combeima'
+                ],
+                tip: 'Lleva cámara lista para las fotos en la Casa al Revés y ropa cómoda para caminar.'
+            },
+            {
+                id: 'murillo',
+                name: 'Murillo, Termales & Nevado del Ruiz',
+                dept: 'Tolima / Caldas',
+                date: 'Sábado 14 Nov',
+                climate: '5°C - 12°C (Frío de Páramo)',
+                stay: 'Día Completo (14 Nov)',
+                images: [
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZQO4AxCxk6A3uHrJnJPja3N__m0f10NFHChzDzPAp7Rj85YvePQHhqTk&s=10',
+                    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80'
+                ],
+                description: 'Visita al municipio más alto del Tolima a 3 horas de Mariquita, disfrutando de relajantes baños termales naturales y el imponente entorno del Nevado del Ruiz.',
+                activities: [
+                    'Ascenso hacia Murillo y paisajes de páramo',
+                    'Visita y baño relajante en aguas termales de la zona',
+                    'Miradores naturales hacia el Volcán Nevado del Ruiz y frailejones'
+                ],
+                tip: 'Indispensable llevar traje de baño para las termales, gorro, guantes y ropa térmica gruesa.'
+            }
+        ];
+
+        function renderCards(filter = 'all') {
+            const container = document.getElementById('places-container');
+            container.innerHTML = '';
+
+            const filteredPlaces = filter === 'all' 
+                ? destinations 
+                : filter === 'Tolima' 
+                    ? destinations.filter(d => d.dept.includes('Tolima') || d.id === 'honda' || d.id === 'ibague')
+                    : destinations.filter(d => d.id === 'murillo' || d.dept.includes('Caldas'));
+
+            filteredPlaces.forEach(place => {
+                const isMurillo = place.id === 'murillo';
+                const badgeColor = isMurillo ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-amber-100 text-amber-800 border-amber-300';
+                
+                const cardHtml = `
+                    <div id="card-${place.id}" onclick="focusPlace('${place.id}')" class="destination-card bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                        <div>
+                            <!-- Collage de 3 imágenes con proporción fluida -->
+                            <div class="grid grid-cols-3 gap-1 p-2 bg-stone-100">
+                                <div class="col-span-2 h-44 overflow-hidden rounded-lg">
+                                    <img src="${place.images[0]}" alt="${place.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                                </div>
+                                <div class="col-span-1 h-44 flex flex-col gap-1">
+                                    <div class="h-[84px] overflow-hidden rounded-lg">
+                                        <img src="${place.images[1]}" alt="${place.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                                    </div>
+                                    <div class="h-[84px] overflow-hidden rounded-lg">
+                                        <img src="${place.images[2]}" alt="${place.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="px-5 pt-3 pb-5 space-y-4">
+                                <div class="flex flex-wrap gap-2 mb-2">
+                                    <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-stone-900 text-white shadow-sm">
+                                        ${place.date}
+                                    </span>
+                                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full border ${badgeColor} shadow-sm">
+                                        ${place.dept}
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-xl font-bold text-stone-900">${place.name}</h4>
+                                    <div class="flex items-center gap-4 text-xs text-stone-500 mt-1">
+                                        <span class="flex items-center gap-1"><i class="fa-solid fa-temperature-half text-amber-500"></i> ${place.climate}</span>
+                                        <span class="flex items-center gap-1"><i class="fa-solid fa-clock text-emerald-600"></i> ${place.stay}</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-stone-600 leading-relaxed">
+                                    ${place.description}
+                                </p>
+                                <div class="space-y-1.5 pt-2 border-t border-stone-100">
+                                    <p class="text-xs font-bold text-stone-800 uppercase tracking-wider">Actividades del Momento:</p>
+                                    <ul class="text-xs text-stone-600 space-y-1 pl-1">
+                                        ${place.activities.map(act => `<li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5 text-[10px]"></i><span>${act}</span></li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-stone-50 border-t border-stone-100 text-xs text-stone-600 flex items-start gap-2">
+                            <i class="fa-solid fa-lightbulb text-amber-500 mt-0.5 shrink-0"></i>
+                            <span><strong class="text-stone-800">Tip de viaje:</strong> ${place.tip}</span>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        function focusPlace(id) {
+            const card = document.getElementById(`card-${id}`);
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                document.querySelectorAll('.destination-card').forEach(c => c.classList.remove('card-active'));
+                card.classList.add('card-active');
+            }
+        }
+
+        function filterDept(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = 'filter-btn px-3 py-1.5 rounded-full bg-stone-100 text-stone-700 hover:bg-emerald-100 transition';
+            });
+            const activeBtn = document.getElementById(`btn-${type}`);
+            if (activeBtn) {
+                activeBtn.className = 'filter-btn px-3 py-1.5 rounded-full bg-emerald-700 text-white shadow-sm transition';
+            }
+
+            renderCards(type);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards('all');
+        });
+    </script>
+</body>
+</html>
