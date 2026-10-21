@@ -53,7 +53,7 @@
             <span class="text-xs uppercase tracking-widest text-emerald-700 font-semibold bg-emerald-100 px-3 py-1 rounded-full">Itinerario Personalizado</span>
             <h2 class="text-3xl font-extrabold text-stone-900 mt-3 sm:text-4xl">De Valledupar a los Andes Centrales</h2>
             <p class="mt-3 text-base text-stone-600">
-                Recorrido oficial de viaje: Salida nocturna desde Valledupar, llegada a Honda, exploración cultural y de atractivos en Ibagué y cierre de aventura en Murillo, Termales y el Nevado del Ruiz.
+                Recorrido oficial de viaje: Salida nocturna desde Valledupar, llegada a Honda, exploración cultural en Ibagué, aventura en Murillo, Nevados y cierre termal en Caldas y Risaralda.
             </p>
         </section>
 
@@ -70,13 +70,13 @@
                 <!-- Filter Buttons -->
                 <div class="flex flex-wrap gap-2 text-xs font-medium">
                     <button onclick="filterDept('all')" id="btn-all" class="filter-btn px-3 py-1.5 rounded-full bg-emerald-700 text-white shadow-sm transition">
-                        Toda la Ruta (4)
+                        Toda la Ruta (5)
                     </button>
                     <button onclick="filterDept('Tolima')" id="btn-Tolima" class="filter-btn px-3 py-1.5 rounded-full bg-stone-100 text-stone-700 hover:bg-emerald-100 transition">
                         Tolima (3)
                     </button>
                     <button onclick="filterDept('Caldas')" id="btn-Caldas" class="filter-btn px-3 py-1.5 rounded-full bg-stone-100 text-stone-700 hover:bg-emerald-100 transition">
-                        Caldas / Nevados (1)
+                        Caldas & Eje Cafetero (2)
                     </button>
                 </div>
             </div>
@@ -90,30 +90,36 @@
                 <div class="relative z-10 w-full max-w-2xl h-full flex items-center justify-center p-4">
                     <svg viewBox="0 0 500 450" class="w-full h-full drop-shadow-2xl">
                         <!-- Línea de Conexión de Ruta -->
-                        <path d="M 120 80 Q 240 180 340 260 T 370 360" fill="none" stroke="#34d399" stroke-width="3" stroke-dasharray="6,6" opacity="0.6"/>
+                        <path d="M 100 60 Q 200 150 280 200 T 340 280 T 370 360 T 430 390" fill="none" stroke="#34d399" stroke-width="3" stroke-dasharray="6,6" opacity="0.6"/>
 
                         <!-- Valledupar (Salida) -->
                         <g class="map-pin" onclick="focusPlace('valledupar')">
-                            <circle cx="120" cy="80" r="10" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
-                            <text x="120" y="65" fill="#e0f2fe" font-size="11" text-anchor="middle" font-weight="600">Valledupar (Salida)</text>
+                            <circle cx="100" cy="60" r="10" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+                            <text x="100" y="45" fill="#e0f2fe" font-size="11" text-anchor="middle" font-weight="600">Valledupar (Salida)</text>
                         </g>
 
                         <!-- Honda (Jueves 12 Nov) -->
                         <g class="map-pin" onclick="focusPlace('honda')">
-                            <circle cx="280" cy="200" r="11" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+                            <circle cx="280" cy="200" r="10" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
                             <text x="280" y="222" fill="#fde68a" font-size="11" text-anchor="middle" font-weight="600">Honda (12 Nov)</text>
                         </g>
 
                         <!-- Ibagué (Viernes 13 Nov) -->
                         <g class="map-pin" onclick="focusPlace('ibague')">
-                            <circle cx="340" cy="280" r="11" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+                            <circle cx="340" cy="280" r="10" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
                             <text x="340" y="303" fill="#fde68a" font-size="11" text-anchor="middle" font-weight="600">Ibagué & Combeima (13 Nov)</text>
                         </g>
 
                         <!-- Murillo & Nevados (Sábado 14 Nov) -->
                         <g class="map-pin" onclick="focusPlace('murillo')">
-                            <circle cx="370" cy="360" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
-                            <text x="370" y="384" fill="#a7f3d0" font-size="11" text-anchor="middle" font-weight="600">Murillo & Nevados (14 Nov)</text>
+                            <circle cx="370" cy="360" r="10" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+                            <text x="370" y="384" fill="#fde68a" font-size="11" text-anchor="middle" font-weight="600">Murillo & Nevados (14 Nov)</text>
+                        </g>
+
+                        <!-- Termales Manizales y Santa Rosa (Domingo 15 Nov) -->
+                        <g class="map-pin" onclick="focusPlace('termales')">
+                            <circle cx="430" cy="390" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+                            <text x="430" y="415" fill="#a7f3d0" font-size="11" text-anchor="middle" font-weight="600">Termales Caldas/Risaralda (15 Nov)</text>
                         </g>
                     </svg>
                 </div>
@@ -145,7 +151,7 @@
     <!-- Footer -->
     <footer class="bg-stone-900 text-stone-400 py-8 border-t border-stone-800 mt-16">
         <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-2">
-            <p class="font-medium text-stone-300">Itinerario de Viaje: Valledupar → Honda → Ibagué → Murillo & Nevados</p>
+            <p class="font-medium text-stone-300">Itinerario de Viaje: Valledupar → Honda → Ibagué → Murillo → Termales (Caldas/Risaralda)</p>
             <p>© 2026 Planificador de Viajes. Creado con Tailwind CSS.</p>
         </div>
     </footer>
@@ -192,33 +198,13 @@
                 ],
                 tip: 'Disfruta de la frescura matutina junto al río antes de que suba la temperatura del mediodía.'
             },
-            
-            {
-                id: 'murillo',
-                name: 'Murillo & Parque los Nevados',
-                dept: 'Tolima / Caldas',
-                date: 'Viernes 13 Nov',
-                climate: '5°C - 12°C (Frío de Páramo)',
-                stay: 'Día Completo (13 Nov)',
-                images: [
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZQO4AxCxk6A3uHrJnJPja3N__m0f10NFHChzDzPAp7Rj85YvePQHhqTk&s=10',
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1WZpGN51dz26aw3bH3jwX2h72XpFzEtN70ioKjbbrIg1a-OG9MmqEl-Y&s=10',
-                    'https://www.parquesnacionales.gov.co/wp-content/uploads/2026/03/Imagen-9-Frailejones-Creditos-Vanessa-Solis-scaled.jpeg'
-                ],
-                description: 'Visita al municipio más alto del Tolima a 3 horas de Mariquita, disfrutando del imponente entorno del Nevado del Ruiz. <br><br>El parque los Nevados cuenta con 6 cumbres: Nevado del Ruiz, Nevado Santa Isabel, Nevado del Tolima, Nevado el Cisne, Nevado el Quindío y Paramillo de Santa Rosa.',
-                activities: [
-                    'Ascenso hacia Murillo y paisajes de páramo',
-                    'Ruta hacia el parque:<br>* Parada en la vereda Santa Bárbara<br>* Parada en río lagunilla (pasó el 30% de la avalancha de Armero)<br>* Parada en el Sifón (merienda)',
-                    'Dentro del parque hay 4 estaciones:<br>* Aguacerales<br>* Arenales<br>* Lunares<br>* El valle de las tumbas' ],
-                tip: 'Indispensable llevar gorro, guantes y ropa térmica gruesa.'
-            },
             {
                 id: 'ibague',
                 name: 'Ibagué & Cañón del Combeima',
                 dept: 'Tolima',
-                date: 'Sábado 14 Nov',
+                date: 'Viernes 13 Nov',
                 climate: '21°C (Agradable)',
-                stay: 'Día completo 14 Nov',
+                stay: 'Día completo 13 Nov',
                 images: [
                     'https://s3.wasabisys.com/assets.elcronista.co/assets/media/iblog/post/7329.jpg',
                     'https://www.ecosdelcombeima.com/sites/default/files/styles/wide/public/2025-10/29_de_septiembre_1_0.jpg?itok=akJTek7x',
@@ -231,6 +217,47 @@
                     'Senderismo y paisajes imponentes en el Cañón del Combeima'
                 ],
                 tip: 'Lleva cámara lista para las fotos en la Casa al Revés y ropa cómoda para caminar.'
+            },
+            {
+                id: 'murillo',
+                name: 'Murillo & Parque los Nevados',
+                dept: 'Tolima / Caldas',
+                date: 'Sábado 14 Nov',
+                climate: '5°C - 12°C (Frío de Páramo)',
+                stay: 'Día Completo (14 Nov)',
+                images: [
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZQO4AxCxk6A3uHrJnJPja3N__m0f10NFHChzDzPAp7Rj85YvePQHhqTk&s=10',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1WZpGN51dz26aw3bH3jwX2h72XpFzEtN70ioKjbbrIg1a-OG9MmqEl-Y&s=10',
+                    'https://www.parquesnacionales.gov.co/wp-content/uploads/2026/03/Imagen-9-Frailejones-Creditos-Vanessa-Solis-scaled.jpeg'
+                ],
+                description: 'Visita al municipio más alto del Tolima a 3 horas de Mariquita, disfrutando del imponente entorno del Nevado del Ruiz. <br><br>El parque los Nevados cuenta con 6 cumbres: Nevado del Ruiz, Nevado Santa Isabel, Nevado del Tolima, Nevado el Cisne, Nevado el Quindío y Paramillo de Santa Rosa.',
+                activities: [
+                    'Ascenso hacia Murillo y paisajes de páramo',
+                    'Ruta hacia el parque:<br>* Parada en la vereda Santa Bárbara<br>* Parada en río lagunilla (pasó el 30% de la avalancha de Armero)<br>* Parada en el Sifón (merienda)',
+                    'Dentro del parque hay 4 estaciones:<br>* Aguacerales<br>* Arenales<br>* Lunares<br>* El valle de las tumbas'
+                ],
+                tip: 'Indispensable llevar gorro, guantes y ropa térmica gruesa.'
+            },
+            {
+                id: 'termales',
+                name: 'Termales El Otoño & Santa Rosa de Cabal',
+                dept: 'Caldas / Risaralda',
+                date: 'Domingo 15 Nov',
+                climate: '18°C - 24°C (Templado / Húmedo)',
+                stay: 'Cierre de Viaje (15 Nov)',
+                images: [
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiWw5eV3iTzowB-FiZoc-8zaDdshoevNaV6RXHQ1cxIy9iMKrFKMxixucZ&s=10',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaynxwu3h3BTNXhC1qdjabqiIxAiJowpywd-CYJVPXxF2KDLRx_c0U-Vw&s=10',
+                    'https://centrocatalina.com/wp-content/uploads/2023/07/149706221.jpg'
+                ],
+                description: 'Gran cierre de itinerario relajándose en las aguas volcánicas y medicinales de la región cafetera, combinando la elegancia de Termales El Otoño en Manizales con la majestuosidad de los Termales de Santa Rosa de Cabal.',
+                activities: [
+                    'Mañana de relajación y spa en Termales El Otoño (Manizales)',
+                    'Traslado hacia el departamento de Risaralda',
+                    'Disfrute de las cascadas y piscinas termales naturales de Santa Rosa de Cabal',
+                    'Retorno o conexión final de viaje'
+                ],
+                tip: 'Lleva vestido de baño adicional, sandalias antideslizantes y una muda cómoda para después del baño termal.'
             }
         ];
 
@@ -242,11 +269,11 @@
                 ? destinations 
                 : filter === 'Tolima' 
                     ? destinations.filter(d => d.dept.includes('Tolima') || d.id === 'honda' || d.id === 'ibague')
-                    : destinations.filter(d => d.id === 'murillo' || d.dept.includes('Caldas'));
+                    : destinations.filter(d => d.id === 'murillo' || d.id === 'termales' || d.dept.includes('Caldas'));
 
             filteredPlaces.forEach(place => {
-                const isMurillo = place.id === 'murillo';
-                const badgeColor = isMurillo ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-amber-100 text-amber-800 border-amber-300';
+                const isTermales = place.id === 'termales';
+                const badgeColor = isTermales ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-amber-100 text-amber-800 border-amber-300';
                 
                 const cardHtml = `
                     <div id="card-${place.id}" onclick="focusPlace('${place.id}')" class="destination-card bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between">
